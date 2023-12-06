@@ -6,7 +6,7 @@ export default function Btn({text, style} ) {
   return (
     <Button
       variant="gradient"
-      size="lg"
+      size="md"
       radius="md"
       mt="xl"
       className={`font-normal text-[16px] transition duration-300 ${style}`}

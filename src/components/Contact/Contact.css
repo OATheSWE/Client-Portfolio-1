@@ -1,0 +1,18 @@
+.m-8fb7ebe7 {
+    background-color: #43366a;
+    border-radius: 20px;
+    color: white;
+    height: 40px;
+    transition: 150ms ease-in-out;
+    border: transparent;
+}
+
+.m-8fb7ebe7:focus, .m-8fb7ebe7:focus-within {
+    outline: 2px solid;
+    outline-color: #F86F03;
+    --_input-bd: transparent;
+}
+
+.m-8fb7ebe7::placeholder {
+    color: white;
+}

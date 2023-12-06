@@ -10,18 +10,20 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import styles from "../../constants";
-import { ImageCollection } from "../../assets/images";
 import Btn from "../Button";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
+import { IconImports } from "../../assets";
+import "./Contact.css";
 
-export default function MessageUs() {
+export default function Contact() {
   const form = useForm({
     initialValues: {
       name: "",
       email: "",
       subject: "",
       message: "",
+      phone: "",
     },
     validate: {
       name: (value) => value.trim().length < 2,
@@ -37,7 +39,7 @@ export default function MessageUs() {
   // Animation for the left column (coming from the left)
   const leftColAnimation = useSpring({
     opacity: inView ? 1 : 0,
-    transform: inView ? "translateX(0)" : "translateY(-50%)",
+    transform: inView ? "translateX(0)" : "translateX(100%)",
     filter: inView ? "blur(0)" : "blur(4px)",
     config: { mass: 1, tension: 80, friction: 26 },
   });
@@ -45,74 +47,122 @@ export default function MessageUs() {
   // Animation for the right column (coming from the right)
   const rightColAnimation = useSpring({
     opacity: inView ? 1 : 0,
-    transform: inView ? "translateX(0)" : "translateY(50%)",
+    transform: inView ? "translateX(0)" : "translateX(-100%)",
     filter: inView ? "blur(0)" : "blur(4px)",
     config: { mass: 1, tension: 80, friction: 26 },
   });
 
+  // Animation for the header (coming from the top)
+  const headerAnimation = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(100%)",
+    filter: inView ? "blur(0)" : "blur(4px)",
+    config: { mass: 1, tension: 80, friction: 26 },
+  });
+
+  const contactInfo = [
+    {
+      icon: <IconImports.FaPhone className="w-6 h-6 mt-4" />,
+      info: "+8801863-931220",
+      info2: "+8801567-953483",
+      id: 1,
+    },
+    {
+      icon: <IconImports.IoMdMail className="w-6 h-6 mt-0.5" />,
+      info: "mdriead.bd@gmail.com",
+      id: 2,
+    },
+    {
+      icon: <IconImports.FaLocationArrow className="w-6 h-6" />,
+      info: "Zirabo, Ashulia, Savar, Dhaka",
+      id: 3,
+    },
+  ];
+
   return (
-    <div ref={ref} className={`w-full ${styles.body} bg-secondary`}>
-      <Grid gutter={60} className={`font-sans`}>
-        <Grid.Col span={{ base: 12, md: 5 }} className="flex flex-col py-20">
+    <div ref={ref} className={`w-full ${styles.body} bg-secondary pt-6`}>
+      <animated.div style={headerAnimation}>
+        <Title
+          order={2}
+          size="h1"
+          fw={900}
+          ta="center"
+          c={`white`}
+          className={`font-sans`}
+        >
+          Contact
+          <div className="w-56 h-0.5 bg-white block mx-auto mt-3" />
+        </Title>
+      </animated.div>
+      <Grid gutter={60} className={`font-sans`} pr={`sm`}>
+        <Grid.Col
+          span={{ base: 12, md: 5.5 }}
+          className="flex justify-center flex-col"
+        >
+          <animated.div style={rightColAnimation} className={`space-y-4`}>
+            {contactInfo.map((info) => (
+              <div
+                className="flex gap-5 text-white lg:text-[17px]"
+                key={info.id}
+              >
+                {info.icon}
+                {info.info}
+                <br />
+                {info.info2}
+              </div>
+            ))}
+          </animated.div>
+        </Grid.Col>
+        <Grid.Col
+          span={{ base: 12, md: 6.5 }}
+          className="flex flex-col py-20 text-white"
+        >
           <animated.div style={leftColAnimation}>
             <form onSubmit={form.onSubmit(() => {})}>
-              <Title order={2} size="h1" fw={900} ta="center">
-                Get in touch
-              </Title>
+              <TextInput
+                placeholder="Full Name"
+                mt="md"
+                name="name"
+                {...form.getInputProps("name")}
+              />
 
-              <SimpleGrid cols={{ base: 1, sm: 2 }} mt="xl">
+              <TextInput
+                placeholder="Email Address"
+                mt="md"
+                name="email"
+                {...form.getInputProps("email")}
+              />
+
+              <SimpleGrid cols={{ base: 1, sm: 2 }} mt={`md`}>
                 <TextInput
-                  label="Name"
-                  placeholder="Your name"
-                  name="name"
-                  variant="filled"
-                  {...form.getInputProps("name")}
+                  placeholder="Phone Number"
+                  name="phone"
+                  {...form.getInputProps("phone")}
                 />
                 <TextInput
-                  label="Email"
-                  placeholder="Your email"
-                  name="email"
-                  variant="filled"
-                  {...form.getInputProps("email")}
+                  placeholder="Subject"
+                  name="subject"
+                  {...form.getInputProps("subject")}
                 />
               </SimpleGrid>
 
-              <TextInput
-                label="Subject"
-                placeholder="Subject"
-                mt="md"
-                name="subject"
-                variant="filled"
-                {...form.getInputProps("subject")}
-              />
               <Textarea
                 mt="md"
-                label="Message"
                 placeholder="Your message"
                 maxRows={10}
                 minRows={5}
                 autosize
                 name="message"
-                variant="filled"
                 {...form.getInputProps("message")}
               />
 
-              <Group justify="center" mt="xl">
+              <Group justify="center">
                 <Btn
                   text="Send Message"
-                  style={`bg-accent hover:bg-transparent hover:border-2 hover:border-accent hover:border-solid hover:text-black`}
+                  style={`bg-[#43366a] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:text-white`}
                 />
               </Group>
             </form>
-          </animated.div>
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 7 }} className="">
-          <animated.div style={rightColAnimation} className={`h-full`}>
-            {/* <Image
-              src={ImageCollection.ManWithPhone}
-              className={`relative z-[150] max-w-[800px] h-full`}
-            /> */}
-            <div className="">Hello</div>
           </animated.div>
         </Grid.Col>
       </Grid>
