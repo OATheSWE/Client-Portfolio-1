@@ -1,14 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-import App from './App.jsx'
 import "./index.css";
+import AllRoutes from "./routes/AllRoutes.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <MantineProvider>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-</MantineProvider>
-)
+    <React.StrictMode>
+      <AllRoutes />
+    </React.StrictMode>
+  </MantineProvider>
+);

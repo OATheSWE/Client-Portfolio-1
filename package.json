@@ -10,15 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.3.1",
     "@mantine/core": "^7.3.0",
     "@mantine/ds": "^7.2.2",
     "@mantine/form": "^7.3.0",
     "@mantine/hooks": "^7.3.0",
     "@react-spring/web": "^9.7.3",
+    "install": "^0.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-intersection-observer": "^9.5.3"
+    "react-intersection-observer": "^9.5.3",
+    "react-router-dom": "^6.20.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

@@ -1,34 +1,73 @@
-import React from "react";
-import styles from "../../constants";
-import { Image, SimpleGrid } from "@mantine/core";
-import { ImageCollection } from "../../assets/images";
+import { Card, Image, Text, Group, SimpleGrid } from "@mantine/core";
+import classes from "./Portfolio.module.css";
+import Btn from "../Button";
+import { styles, PPTS, projectTypes } from "../../constants";
+import Heading from "../Heading";
+import { useTrail, animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
 
-export default function Partners() {
-  const images = [
-    { img: ImageCollection.Partners1, id: 1 },
-    { img: ImageCollection.Partners2, id: 2 },
-    { img: ImageCollection.Partners3, id: 3 },
-    { img: ImageCollection.Partners4, id: 4 },
-    { img: ImageCollection.Partners5, id: 5 },
-  ];
+export default function Portfolio() {
+  const navigate = useNavigate();
 
-  const image = images.map((img) => (
-    <Image
-      src={img.img}
-      className={`max-w-[150px] flex cursor-pointer opacity-60 hover:opacity-100 transition duration-300`}
-      key={img.id}
-    />
+  const [ref, inView] = useInView({
+    threshold: 0.4,
+  });
+
+  const trail = useTrail(PPTS.length, {
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateX(0)" : "translateX(-50%)",
+    filter: inView ? "blur(0)" : "blur(4px)",
+    config: { mass: 1, tension: 100, friction: 26 },
+    delay: 300, // Adjust this delay based on your preference
+  });
+
+  const handleNavigate = (projectType) => {
+    navigate(`/projects/${projectType}`);
+  };
+
+  const all = trail.map((style, index) => (
+    <animated.div key={index} style={style}>
+      <Card
+        withBorder
+        radius="md"
+        className={`${classes.card} flex fex-col items-center w-full max-w-[400px] shadow-md transition duration-500 hover:shadow-xl hover:-translate-y-2 cursor-pointer`}
+        mt={0}
+      >
+        <Card.Section className="h-[180px] w-full max-w-[400px] overflow-hidden mt-[0.15rem]">
+          <Image
+            src={PPTS[index].src}
+            className="w-full h-full transition duration-500 hover:scale-110"
+          />
+        </Card.Section>
+
+        <Text className={classes.title} fw={500}>
+          {PPTS[index].project}
+        </Text>
+
+        <Text fz="sm" c="dimmed" lineClamp={4}>
+          {PPTS[index].detail}
+        </Text>
+
+        <Group justify="center" className="w-[100vw]" key={`btn-${index}`}>
+          <Btn
+            text="See Projects"
+            style={`bg-accent max-[768px]:w-[48%] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:bg-transparent hover:text-black`}
+            click={() => handleNavigate(projectTypes[index])}
+          />
+        </Group>
+      </Card>
+    </animated.div>
   ));
 
   return (
-    <div className={`lg:mx-20 mx-9 sm:mx-14 -mt-[260px] md:-mt-[200px] lg:-mt-[120px] ${styles.body} font-sans bg-black flex justify-center py-8 lg:pl-32 absolute rounded-xl z-[200] `}>
-      <SimpleGrid
-        cols={{ base: 2, sm: 3, md: 6 }}
-        spacing={{ base: "xl", md: 50 }}
-        verticalSpacing={{ base: "xl", md: 50 }}
-        className=""
-      >
-        {image}
+    <div
+      className={`${styles.body} bg-primary pb-12 pt-6 grid place-items-center xl:justify-center`}
+      ref={ref}
+    >
+      <Heading name="Porfolio" />
+      <SimpleGrid mt={60} cols={{ base: 1, sm: 3, lg: 4 }}>
+        {all}
       </SimpleGrid>
     </div>
   );
