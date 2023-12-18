@@ -9,9 +9,11 @@ import Heading from "../Heading";
 import TextField from "../TextField";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
+import { useRef } from "react";
 
 export default function Contact() {
   const [msg, setMsg] = useState();
+  const formD = useRef();
   const form = useForm({
     initialValues: {
       name: "",
@@ -48,7 +50,9 @@ export default function Contact() {
     config: { mass: 1, tension: 80, friction: 26 },
   });
 
-  const SendEmail = async (values) => {
+  const SendEmail = (e) => {
+    e.preventDefault();
+
    
     // If all fields are filled, use Mantine's validation
     if (!form.isValid) {
@@ -57,29 +61,18 @@ export default function Contact() {
       return;
     }
 
-    try {
-      // Send email using EmailJS
-      await emailjs.sendForm(
-        "service_2gtd918",
-        "template_iu1tbcb",
-        values,
-        "J3mNgEZxGKtD-N8E_",
-        // Add the user's email as the recipient
-        values.email
-      );
-
-      // Show success message
-      // setForm({ message: "Your message has been sent successfully!" });
-      setMsg(true);
-      console.log("hello");
-    } catch (error) {
-      console.error(error);
-      // Show error message
-      // setForm({ message: "Oops! Something went wrong. Please try again later." });
-      setMsg(false);
-      console.log("he");
-    }
+    emailjs.sendForm('service_2gtd918', 'template_8idcxr6', formD.current, 'J3mNgEZxGKtD-N8E_', form.values.email)
+    .then((result) => {
+        console.log(result.text);
+        setMsg(true);
+        form.reset();
+    }, (error) => {
+        console.log(error.text);
+        setMsg(false);
+    });
   };
+
+  
 
   return (
     <section
@@ -117,6 +110,7 @@ export default function Contact() {
           <animated.div style={leftColAnimation}>
             <form
              onSubmit={SendEmail}
+             ref={formD}
             >
               {/* Use TextField component for each input */}
               <TextField
@@ -147,37 +141,32 @@ export default function Contact() {
                 minRows={5}
                 autosize
                 name="message"
-                form={form}
                 mt={20}
                 className=""
+                required
+                {...form.getInputProps("message")}
               />
 
               <Group justify="center">
-                <Btn
-                  text="Send Message"
-                  style={`bg-[#43366a] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:text-white`}
-                  xl="xl"
-                />
+                <input type="submit" value="Send Message" className="bg-[#43366a] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:text-white mt-[20px] px-4 py-2.5"/>
               </Group>
-
-              <input type="submit" value="Send" />
 
               {/* Display the text if the form has been submitted successfully */}
               {msg === true && (
-                <Text className="text-accent mt-2">
+                <Text className="text-accent mt-2 text-center">
                   Your message has been sent successfully!
                 </Text>
               )}
 
               {msg === 1 && (
-                <Text className="text-accent mt-2">
+                <Text className="text-accent mt-2 text-center">
                   Invalid form input form.
                 </Text>
               )}
 
               {/* Display the text if the form wasnt submitted successfully */}
               {msg === false && (
-                <Text className="text-accent mt-2">
+                <Text className="text-accent mt-2 text-center">
                   Oops! Something went wrong. Please try again later.
                 </Text>
               )}
