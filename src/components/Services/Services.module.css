@@ -1,23 +1,24 @@
-.wrapper {
-    padding-top: calc(var(--mantine-spacing-xl) * 4);
+.card {
+  background-color: var(--mantine-color-body);
+  max-width: 320px;
+  width: 100%;
+}
+
+.title {
+  display: block;
+  margin-top: var(--mantine-spacing-md);
+  margin-bottom: rem(5px);
+  text-align: center;
+}
+
+.action {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
   }
-  
-  .title {
-    font-family: Greycliff CF, var(--mantine-font-family);
-    font-weight: 900;
-    margin-bottom: var(--mantine-spacing-md);
-    text-align: center;
-  
-    @media (max-width: $mantine-breakpoint-sm) {
-      font-size: rem(28px);
-      text-align: left;
-    }
-  }
-  
-  .description {
-    text-align: center;
-  
-    @media (max-width: $mantine-breakpoint-sm) {
-      text-align: left;
-    }
-  }
+}
+
+.footer {
+  margin-top: var(--mantine-spacing-md);
+}

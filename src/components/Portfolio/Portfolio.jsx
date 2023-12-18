@@ -1,7 +1,7 @@
 import { Card, Image, Text, Group, SimpleGrid } from "@mantine/core";
 import classes from "./Portfolio.module.css";
 import Btn from "../Button";
-import { styles, PPTS, projectTypes } from "../../constants";
+import { styles, PPTS, projectTypes } from "../../data";
 import Heading from "../Heading";
 import { useTrail, animated } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
@@ -12,6 +12,7 @@ export default function Portfolio() {
 
   const [ref, inView] = useInView({
     threshold: 0.4,
+    triggerOnce: true,
   });
 
   const trail = useTrail(PPTS.length, {
@@ -41,11 +42,11 @@ export default function Portfolio() {
           />
         </Card.Section>
 
-        <Text className={classes.title} fw={500}>
+        <Text className={classes.title} fw={700}>
           {PPTS[index].project}
         </Text>
 
-        <Text fz="sm" c="dimmed" lineClamp={4}>
+        <Text fz="sm" lineClamp={4}>
           {PPTS[index].detail}
         </Text>
 
@@ -54,6 +55,7 @@ export default function Portfolio() {
             text="See Projects"
             style={`bg-accent max-[768px]:w-[48%] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:bg-transparent hover:text-black`}
             click={() => handleNavigate(projectTypes[index])}
+            xl="xl"
           />
         </Group>
       </Card>
@@ -61,14 +63,15 @@ export default function Portfolio() {
   ));
 
   return (
-    <div
+    <section
       className={`${styles.body} bg-primary pb-12 pt-6 grid place-items-center xl:justify-center`}
       ref={ref}
+      id="projects"
     >
       <Heading name="Porfolio" />
-      <SimpleGrid mt={60} cols={{ base: 1, sm: 3, lg: 4 }}>
+      <SimpleGrid mt={60} cols={{ base: 1, xs:2, sm: 3, lg: 4 }}>
         {all}
       </SimpleGrid>
-    </div>
+    </section>
   );
 }

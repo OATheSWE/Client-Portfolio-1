@@ -1,267 +1,187 @@
-// import {
-//   HoverCard,
-//   Group,
-//   Text,
-//   SimpleGrid,
-//   Divider,
-//   Center,
-//   Box,
-//   Burger,
-//   Drawer,
-//   Collapse,
-//   ScrollArea,
-//   rem,
-//   Image,
-// } from "@mantine/core";
-// import { MantineLogo } from "@mantine/ds";
-// import { useDisclosure } from "@mantine/hooks";
-// import classes from "./NavBar.module.css";
-// import { IconImports } from "../../assets/IconImports";
-// import styles from "../../constants";
-// import { ImageCollection } from "../../assets/images";
+import React from "react";
+import { Group, Box, Burger, Drawer, ScrollArea } from "@mantine/core";
+import { MantineLogo } from "@mantine/ds";
+import { useDisclosure } from "@mantine/hooks";
+import classes from "./NavBar.module.css";
+import Btn from "../Button";
+import { styles } from "../../data";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-// const explore = [
-//   {
-//     title: "Features",
-//   },
-//   {
-//     title: "Top-Rated",
-//   },
-//   {
-//     title: "Shop All",
-//   },
-// ];
-
-// const connect = [
-//   {
-//     title: "MessageUs",
-//   },
-//   {
-//     title: "Testimonials",
-//   },
-// ];
-
-// export default function NavBar() {
-//   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-//     useDisclosure(false);
-//   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-//   const [linksOpened2, { toggle: toggleLinks2 }] = useDisclosure(false);
-
-//   const explores = explore.map((item) => (
-//     <a
-//       className={`font-sans py-2 text-center transition duration-300 hover:bg-secondary hover:text-accent ${classes.subLink}`}
-//       key={item.title}
-//       href="#"
-//     >
-//       <Text size="sm" fw={500}>
-//         {item.title}
-//       </Text>
-//     </a>
-//   ));
-
-//   const connects = connect.map((item) => (
-//     <a
-//       className={`font-sans py-2 text-center transition duration-300 hover:bg-secondary hover:text-accent ${classes.subLink}`}
-//       key={item.title}
-//       href="#"
-//     >
-//       <Text size="sm" fw={500}>
-//         {item.title}
-//       </Text>
-//     </a>
-//   ));
-
-//   return (
-//     <Box pb={80}>
-//       <header className={`${classes.header} bg-primary`}>
-//         <Group justify="space-between" h="100%">
-//           <a href="#">
-//             {/* <Image
-//               src={ImageCollection.Logo}
-//               className="max-w-[120px] object-cover mt-2"
-//             /> */}
-//           </a>
-
-//           <Group h="100%" gap={0} visibleFrom="sm">
-//             <a
-//               href="#"
-//               className={`hover:border-b-2 border-accent ${classes.link}`}
-//             >
-//               Home
-//             </a>
-//             <HoverCard
-//               width={500}
-//               position="bottom"
-//               radius="md"
-//               shadow="md"
-//               withinPortal
-//               className={`font-sans`}
-//             >
-//               <HoverCard.Target>
-//                 <a
-//                   href="#"
-//                   className={`hover:border-b-2 border-accent ${classes.link}`}
-//                 >
-//                   <Center inline>
-//                     <Box component="span" mr={5}>
-//                       Explore
-//                     </Box>
-//                     {/* <IconImports.IoIosArrowDown /> */}
-//                   </Center>
-//                 </a>
-//               </HoverCard.Target>
-
-//               <HoverCard.Dropdown style={{ overflow: "hidden" }}>
-//                 <SimpleGrid cols={3} spacing={0}>
-//                   {explores}
-//                 </SimpleGrid>
-//               </HoverCard.Dropdown>
-//             </HoverCard>
-//             <a
-//               href="#"
-//               className={`hover:border-b-2 border-accent ${classes.link}`}
-//             >
-//               About
-//             </a>
-//             <HoverCard
-//               width={300}
-//               position="bottom"
-//               radius="md"
-//               shadow="md"
-//               withinPortal
-//             >
-//               <HoverCard.Target>
-//                 <a
-//                   href="#"
-//                   className={`hover:border-b-2 border-accent ${classes.link}`}
-//                 >
-//                   <Center inline>
-//                     <Box component="span" mr={5}>
-//                       Connect
-//                     </Box>
-//                     {/* <IconImports.IoIosArrowDown /> */}
-//                   </Center>
-//                 </a>
-//               </HoverCard.Target>
-
-//               <HoverCard.Dropdown style={{ overflow: "hidden" }}>
-//                 <SimpleGrid cols={2} spacing={0}>
-//                   {connects}
-//                 </SimpleGrid>
-//               </HoverCard.Dropdown>
-//             </HoverCard>
-//             <a
-//               href="#"
-//               className={`hover:border-b-2 border-accent ${classes.link}`}
-//             >
-//               Contact
-//             </a>
-//           </Group>
-
-//           {/* <Group visibleFrom="sm">
-//             <a
-//               href="#"
-//               className="w-9 h-9 rounded-full flex justify-center items-center bg-white transition duration-300 hover:bg-accent hover:text-white"
-//             >
-//               <IconImports.MdOutlineImageSearch className="w-5 h-5" />
-//             </a>
-//             <a
-//               href="#"
-//               className="w-9 h-9 rounded-full flex justify-center items-center bg-white transition duration-300 hover:bg-accent hover:text-white"
-//             >
-//               <IconImports.FaUser />
-//             </a>
-//           </Group> */}
-
-//           <Burger
-//             opened={drawerOpened}
-//             onClick={toggleDrawer}
-//             hiddenFrom="sm"
-//           />
-//         </Group>
-//       </header>
-
-//       <Drawer
-//         opened={drawerOpened}
-//         onClose={closeDrawer}
-//         size="100%"
-//         padding="md"
-//         title="Navigation"
-//         hiddenFrom="sm"
-//         zIndex={1000000}
-//       >
-//         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
-//           <Divider my="sm" />
-
-//           <a href="#" className={`font-sans ${classes.link}`}>
-//             Home
-//           </a>
-//           <a
-//             className={`font-sans ${classes.link}`}
-//             onClick={toggleLinks}
-//             href="#"
-//           >
-//             <Center inline>
-//               <Box component="span" mr={5}>
-//                 Explore
-//               </Box>
-//               <IconImports.IoIosArrowDown />
-//             </Center>
-//           </a>
-
-//           <Collapse in={linksOpened} className="flex justify-start ml-4">
-//             {explores}
-//           </Collapse>
-//           <a href="#" className={`font-sans ${classes.link}`}>
-//             About
-//           </a>
-//           <a
-//             className={`font-sans ${classes.link}`}
-//             onClick={toggleLinks2}
-//             href="#"
-//           >
-//             <Center inline>
-//               <Box component="span" mr={5}>
-//                 Connect
-//               </Box>
-//               <IconImports.IoIosArrowDown />
-//             </Center>
-//           </a>
-
-//           <Collapse in={linksOpened2} className="flex justify-start ml-4">
-//             {connects}
-//           </Collapse>
-//           <a href="#" className={`font-sans ${classes.link}`}>
-//             Contact
-//           </a>
-
-//           <Divider my="sm" />
-
-//           {/* <Group className="ml-4">
-//             <a
-//               href="#"
-//               className="w-9 h-9 rounded-full flex justify-center items-center bg-white transition duration-300 hover:bg-accent hover:text-white"
-//             >
-//               <IconImports.MdOutlineImageSearch className="w-5 h-5" />
-//             </a>
-//             <a
-//               href="#"
-//               className="w-9 h-9 rounded-full flex justify-center items-center bg-white transition duration-300 hover:bg-accent hover:text-white"
-//             >
-//               <IconImports.FaUser />
-//             </a>
-//           </Group> */}
-//         </ScrollArea>
-//       </Drawer>
-//     </Box>
-//   );
-// }
-
-
-import React from 'react'
+const navLinks = [
+  { text: "Home", href: "#home" },
+  { text: "About", href: "#about" },
+  { text: "Services", href: "#services" },
+  { text: "Skills", href: "#skills" },
+  { text: "Projects", href: "#projects" },
+];
 
 export default function NavBar() {
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
+  const [activeSection, setActiveSection] = useState("");
+  const isLandingPage = window.location.pathname === "/"; // Adjust the pathname as needed'
+  const navigate = useNavigate();
+
+  const smoothScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+      closeDrawer();
+    }
+  };
+
+  const handleScroll = () => {
+    const sections = document.querySelectorAll("section[id]");
+    const scrollPosition = window.scrollY;
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 80; // Adjust for header height
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        setActiveSection(section.id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div>NavBar</div>
-  )
+    <Box className="fixed w-full z-[99999] shadow-xl">
+      <header
+        className={`flex justify-between items-center bg-secondary md:px-8 text-white font-sans ${classes.header} ${styles.body}`}
+      >
+        <Group h="100%" className="flex items-center">
+          <MantineLogo size={30} />
+        </Group>
+
+        <Group h="100%" gap={0} className="hidden md:flex">
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href={`#${link.href}`}
+              className={`${classes.link} ${
+                activeSection === link.href.substring(1) ? "text-accent" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isLandingPage) {
+                  navigate("/");
+                  setTimeout(() => {
+                    smoothScroll(link.href.substring(1));
+                  }, 300)
+                } else {
+                  smoothScroll(link.href.substring(1));
+                }
+              }}
+              
+            >
+              {link.text}
+            </a>
+          ))}
+        </Group>
+
+        <a
+          href="#hire-me"
+          className="hidden md:flex"
+          onClick={(e) => {
+            e.preventDefault();
+            if (!isLandingPage) {
+              navigate("/");
+              setTimeout(() => {
+                smoothScroll("hire-me");
+              }, 300)
+            } else {
+              smoothScroll("hire-me");
+            }
+          }}
+          
+        >
+          <Btn
+            text="Hire me"
+            style={`bg-white text-black rounded-3xl border-2 hover:border-accent border-solid hover:bg-accent hover:text-white`}
+          />
+        </a>
+
+        <Burger
+          opened={drawerOpened}
+          onClick={toggleDrawer}
+          hiddenFrom="sm"
+          size={23}
+          color="white"
+        />
+      </header>
+
+      <Drawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        size="100%"
+        hiddenFrom="sm"
+        zIndex={1000000}
+        className="font-sans text-white p-0 m-0"
+      >
+        <ScrollArea
+          h={`calc(100vh - 80px)`}
+          mx="-md"
+          className="bg-secondary block mx-auto px-4"
+        >
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href={`#${link.href}`}
+              className={`${classes.link} ${
+                activeSection === link.href.substring(1) ? "text-accent" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isLandingPage) {
+                  navigate("/");
+                  setTimeout(() => {
+                    smoothScroll(link.href.substring(1));
+                  }, 300)
+                } else {
+                  smoothScroll(link.href.substring(1));
+                }
+              }}
+              
+            >
+              {link.text}
+            </a>
+          ))}
+
+          <a
+            href="#hire-me"
+            className=""
+            onClick={(e) => {
+              e.preventDefault();
+              if (!isLandingPage) {
+                navigate("/");
+                setTimeout(() => {
+                  smoothScroll("hire-me");
+                }, 300)
+              } else {
+                smoothScroll("hire-me");
+              }
+            }}
+            
+          >
+            <Btn
+              text="Hire me"
+              style={`bg-white text-black w-[92vw] max-[360px]:w-[88vw] rounded-3xl border-2 hover:border-accent border-solid hover:bg-accent hover:text-white mt-8`}
+            />
+          </a>
+        </ScrollArea>
+      </Drawer>
+    </Box>
+  );
 }

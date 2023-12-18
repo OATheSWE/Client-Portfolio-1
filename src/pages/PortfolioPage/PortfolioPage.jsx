@@ -2,18 +2,22 @@
 /* eslint-disable react/prop-types */
 import { Container, Image, SimpleGrid, Text } from "@mantine/core";
 import React from "react";
-import { styles, projects } from "../../constants";
+import { styles, projects } from "../../data";
 import { Btn } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
 
 export default function PortfolioPage({ projectType }) {
+  const [ref, inView] = useInView({
+    threshold: 0.4,
+  });
+
   const pageHeading = useSpring({
-    opacity: 1,
-    transform: "translateX(0)",
-    filter: "blur(0px)",
-    from: { opacity: 0, transform: "translateX(-50%)", filter: "blur(4px)" },
-    config: { mass: 1, tension: 80, friction: 26 },
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(-50%)",
+    filter: inView ? "blur(0)" : "blur(4px)",
+    config: { mass: 1, tension: 80, friction: 6 },
   });
 
   const navigate = useNavigate();
@@ -35,7 +39,7 @@ export default function PortfolioPage({ projectType }) {
 
   return (
     <div className={`${styles.body} bg-secondary w-full h-auto pb-14`}>
-      <animated.div style={pageHeading}>
+      <animated.div ref={ref} style={pageHeading}>
         <Container className="space-y-4 max-w-[650px] w-full min-[480px]:translate-y-[100%] translate-y-[50%] text-white text-center">
           <Text className="min-[480px]:text-[48px] uppercase font-extrabold text-[38px]">
             {projectType} Projects
@@ -121,6 +125,7 @@ export default function PortfolioPage({ projectType }) {
                     <Btn
                       text="View Project"
                       style={`text-black border-2 hover:border-accent hover:bg-accent hover:text-white border-solid font-semibold text-[14px] lg:text-[16px] h-9`}
+                      xl="xl"
                     />
                   </a>
                 </Container>

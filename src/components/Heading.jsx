@@ -4,7 +4,7 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
 
-export default function Heading({ name }) {
+export default function Heading({ name, name2 }) {
 
   const [ref, inView] = useInView({
     threshold: 0.4, // Adjust this value based on your preference
@@ -28,7 +28,7 @@ export default function Heading({ name }) {
         c={`white`}
         className={`font-sans`}
       >
-        {name}
+        {name} <span className="text-accent">{name2}</span>
         <div className="w-56 h-0.5 bg-white block mx-auto mt-3" />
       </Title>
     </animated.div>

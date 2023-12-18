@@ -1,6 +1,6 @@
 // main routing file
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { projectTypes } from "../constants";
+import { projectTypes } from "../data";
 import { LandingPage, PortfolioPage, Website } from "../pages";
 
 export default function AllRoutes() {

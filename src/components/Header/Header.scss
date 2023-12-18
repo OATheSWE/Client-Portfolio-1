@@ -1,0 +1,17 @@
+@import 'typed';
+
+.placeholder {
+    pointer-events: none;
+    @include typed(
+      " Data Analyst",
+      " Data Scientist",
+      " Business Intelligence Analyst",
+      " Database Analyst",
+      " Data Engineer",
+      1.5,
+      (
+        caret-width: 2px,
+        caret-space: 2px
+      )
+    );
+  }

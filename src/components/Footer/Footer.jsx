@@ -1,12 +1,12 @@
-import { Text, Container, Group, Image } from "@mantine/core";
-import classes from "./Footer.module.css";
-import {styles} from "../../constants";
+import { Text } from "@mantine/core";
+import { styles, footerContent } from "../../data";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
 
 export default function Footer() {
   const [ref, inView] = useInView({
-    threshold: 0.4, // Adjust this value based on your preferencz
+    threshold: 0.4, 
+    triggerOnce: true,
   });
 
   // Animation for the left column (coming from the left)
@@ -20,8 +20,8 @@ export default function Footer() {
   return (
     <footer ref={ref} className={`${styles.body} py-6 bg-primary text-white flex-1`}>
       <animated.div style={footerAnimation}>
-        <Text size="sm">
-          Copyright 2023 © Copy:2023 | All Rights Reserved By OA & Success
+        <Text size="sm" className="text-center">
+          {footerContent.text}
         </Text>
       </animated.div>
     </footer>

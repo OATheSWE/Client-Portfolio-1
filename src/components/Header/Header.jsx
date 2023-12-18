@@ -1,87 +1,105 @@
-// import React, { useState, useEffect } from "react";
-// import { Title, Text, Grid, Image } from "@mantine/core";
-// import classes from "./Header.module.css";
-// import styles from "../../constants";
-// import { NavBar } from "../NavBar";
-// import Btn from "../Button";
-// import { ImageCollection } from "../../assets/images";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { Carousel } from "react-responsive-carousel";
-
-
-// export default function Header() {
-//   const [currentSlide, setCurrentSlide] = useState(0);
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-//     }, 3000);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   const images = Array.from({ length: 4 }, (_, index) => (
-//     <Image
-//       src={ImageCollection.Home}
-//       className={`relative z-[150] max-w-[800px]`}
-//       key={index}
-//     />
-//   ));
-
-//   return (
-//     <div className={`${styles.body} lg:h-screen  bg-secondary`}>
-//       <NavBar />
-//       <Grid gutter={60} className="font-sans">
-//         <Grid.Col
-//           span={{ base: 12, md: 5 }}
-//           className="flex flex-col space-y-4 items-start"
-//         >
-//           <Title className={classes.title} order={2}>
-//             Welcome to{" "}
-//             <span className="font-extrabold ">BMD Solutions Concept </span>
-//             <span className="text-accent font-extrabold">.</span>
-//           </Title>
-//           <Title className={classes.title} order={5}>
-//             Your Ultimate Destination for High-Quality Broadcast and Video
-//             Production Media Equipment.
-//           </Title>
-//           <Text c="dimmed">
-//             Explore a world of cutting-edge solutions at our hub, where
-//             precision meets creativity. Elevate your projects with our premier
-//             selection of top-tier broadcast and video production equipment,
-//             setting the stage for unparalleled excellence
-//           </Text>
-
-//           <Btn
-//             text="Discover Our Store"
-//             style={`bg-accent hover:bg-transparent hover:border-2 hover:border-accent hover:border-solid hover:text-black`}
-//           />
-//         </Grid.Col>
-//         <Grid.Col span={{ base: 12, md: 7 }} className="relative">
-//           <div className="absolute bg-gradient-to-b from-yellow-500 to-transparent overflow-hidden w-[100%] h-[80%] z-10 opacity-[0.25] blur-lg"></div>
-//           <Carousel
-//             showArrows={false}
-//             showStatus={false}
-//             showThumbs={false}
-//             selectedItem={currentSlide}
-//             onChange={(index) => setCurrentSlide(index)}
-//             interval={3000}
-//             transitionTime={1500}
-//             showIndicators={false}
-//           >
-//             {images}
-//           </Carousel>
-//         </Grid.Col>
-//       </Grid>
-//     </div>
-//   );
-// }
-
-
-import React from 'react'
+import React, { useState } from 'react';
+import { Title, Text, Grid, Image } from "@mantine/core";
+import { useInView } from "react-intersection-observer";
+import { useSpring, animated } from "@react-spring/web";
+import { styles, headerContent, socials } from "../../data";
+import Btn from "../Button";
+import classes from "./Header.module.css";
+import "./Header.scss";
 
 export default function Header() {
+  const [ref, inView] = useInView({
+    threshold: 0.4,
+    triggerOnce: true,
+  });
+
+  const [downloaded, setDownloaded] = useState(false);
+
+  const leftColAnimation = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(-50%)",
+    filter: inView ? "blur(0)" : "blur(4px)",
+    config: { mass: 1, tension: 80, friction: 26 },
+  });
+
+  const rightColAnimation = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(50%)",
+    filter: inView ? "blur(0)" : "blur(4px)",
+    config: { mass: 1, tension: 80, friction: 26 },
+  });
+
+  const handleDownload = () => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = '../../assets/resume-cv/CV.pdf';
+    downloadLink.download = 'CV.pdf';
+    downloadLink.click();
+
+    // Set the state to indicate that the CV has been downloaded
+    setDownloaded(true);
+  };
+
   return (
-    <div>Header</div>
-  )
+    <section id="home"  ref={ref} className={`w-full py-10 ${styles.body} bg-primary`}>
+      <Grid gutter={50} className={`font-sans mt-10`}>
+        <Grid.Col
+          span={{ base: 12, md: 6 }}
+          className="flex flex-col justify-center max-lg:items-center max-lg:text-center"
+        >
+          <animated.div
+            style={rightColAnimation}
+            className={`max-h-[360px] h-full max-lg:mt-10`}
+          >
+            <Title className={`text-accent font-sans`} order={4}>
+              {headerContent.hi}
+            </Title>
+
+            <Title className={`font-sans ${classes.title}`} order={1}>
+              {headerContent.name}
+            </Title>
+
+            <Text className="text-white font-semibold">
+              And I'm a <span className="text-accent placeholder"></span>
+            </Text>
+
+            <Text className="text-white mt-2">{headerContent.text}</Text>
+
+            <div className="flex space-x-10 flex-1 max-[360px]:space-x-5 mt-8 max-lg:justify-center">
+              {socials.map((social, index) => (
+                <a
+                  href={social.link}
+                  className="p-2 rounded-full border-2 border-white transition duration-300 text-white hover:border-accent hover:text-accent cursor-pointer hover:-translate-y-1"
+                  key={index}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+
+            <a href="#" className="my-auto">
+              <Btn
+                text="Download CV"
+                style={`bg-accent rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:bg-transparent`}
+                xl="xl"
+                click={handleDownload}
+              />
+            </a>
+
+            {/* Display the text if the CV has been downloaded */}
+            {downloaded && (
+              <Text className="text-accent mt-2">You've downloaded my CV.</Text>
+            )}
+          </animated.div>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 6 }}>
+          <animated.div style={leftColAnimation} className={classes.floating}>
+            <Image
+              src={headerContent.img}
+              className={`max-w-[580px] max-[480px]:object-contain w-full h-[500px] object-cover mx-auto`}
+            />
+          </animated.div>
+        </Grid.Col>
+      </Grid>
+    </section>
+  );
 }

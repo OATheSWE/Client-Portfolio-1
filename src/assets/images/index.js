@@ -10,6 +10,8 @@ import pandas from "./pandas.png";
 import Rprogram from "./Rprogram.png";
 import sea from "./sea.png";
 import Sqlprogram from "./Sqlprogram.png";
+import AboutImg from "./about-img.png"
+import Banner from "./Banner Image.png"
 
 const ImageCollection = {
   Excel,
@@ -24,6 +26,8 @@ const ImageCollection = {
   Rprogram,
   sea,
   Sqlprogram,
+  AboutImg,
+  Banner,
 };
 
 export { ImageCollection };

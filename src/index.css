@@ -16,3 +16,21 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+@media (max-width: 360px) {
+    .max-\[360px\]\:w-\[88vw\] {
+        width: 88vw;
+    }
+}
+
+@media (min-width: 840px) {
+    .min-\[840px\]\:flex {
+        display: flex;
+    }
+}
+
+@media (min-width: 640px) {
+    .sm\:hidden {
+        display: none;
+    }
+}

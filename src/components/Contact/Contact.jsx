@@ -1,23 +1,17 @@
-import {
-  TextInput,
-  Textarea,
-  SimpleGrid,
-  Group,
-  Title,
-  Button,
-  Grid,
-  Image,
-} from "@mantine/core";
+import { Textarea, SimpleGrid, Group, Grid, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import {styles} from "../../constants";
+import { styles, contactInfo } from "../../data";
 import Btn from "../Button";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
-import { IconImports } from "../../assets";
 import "./Contact.css";
 import Heading from "../Heading";
+import TextField from "../TextField";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 export default function Contact() {
+  const [msg, setMsg] = useState();
   const form = useForm({
     initialValues: {
       name: "",
@@ -34,7 +28,8 @@ export default function Contact() {
   });
 
   const [ref, inView] = useInView({
-    threshold: 0.4, // Adjust this value based on your preference
+    threshold: 0.4,
+    triggerOnce: true,
   });
 
   // Animation for the left column (coming from the left)
@@ -53,34 +48,55 @@ export default function Contact() {
     config: { mass: 1, tension: 80, friction: 26 },
   });
 
-  const contactInfo = [
-    {
-      icon: <IconImports.FaPhone className="w-6 h-6 mt-4" />,
-      info: "+8801863-931220",
-      info2: "+8801567-953483",
-      id: 1,
-    },
-    {
-      icon: <IconImports.IoMdMail className="w-6 h-6 mt-0.5" />,
-      info: "mdriead.bd@gmail.com",
-      id: 2,
-    },
-    {
-      icon: <IconImports.FaLocationArrow className="w-6 h-6" />,
-      info: "Zirabo, Ashulia, Savar, Dhaka",
-      id: 3,
-    },
-  ];
+  const SendEmail = async (values) => {
+   
+    // If all fields are filled, use Mantine's validation
+    if (!form.isValid) {
+      // Show validation errors and return without sending email
+      setMsg(1);
+      return;
+    }
+
+    try {
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        "service_2gtd918",
+        "template_iu1tbcb",
+        values,
+        "J3mNgEZxGKtD-N8E_",
+        // Add the user's email as the recipient
+        values.email
+      );
+
+      // Show success message
+      // setForm({ message: "Your message has been sent successfully!" });
+      setMsg(true);
+      console.log("hello");
+    } catch (error) {
+      console.error(error);
+      // Show error message
+      // setForm({ message: "Oops! Something went wrong. Please try again later." });
+      setMsg(false);
+      console.log("he");
+    }
+  };
 
   return (
-    <div ref={ref} className={`w-full ${styles.body} bg-secondary pt-6`}>
+    <section
+      id="hire-me"
+      ref={ref}
+      className={`w-full ${styles.body} bg-secondary pt-6`}
+    >
       <Heading name="Contact" />
       <Grid gutter={60} className={`font-sans`} pr={`sm`}>
         <Grid.Col
           span={{ base: 12, sm: 5.5 }}
-          className="flex justify-center flex-col"
+          className="flex justify-center flex-col items-center"
         >
-          <animated.div style={rightColAnimation} className={`space-y-4 mt-10 md:mt-10`}>
+          <animated.div
+            style={rightColAnimation}
+            className={`space-y-4 mt-10 md:mt-10`}
+          >
             {contactInfo.map((info) => (
               <div
                 className="flex gap-5 text-white lg:text-[17px] text-14px min-[480px]:text-16px"
@@ -95,58 +111,80 @@ export default function Contact() {
           </animated.div>
         </Grid.Col>
         <Grid.Col
-          span={{ base: 12, sm: 6.5 }}
-          className="flex flex-col py-20 text-white"
+          span={{ base: 12, sm: 6.4 }}
+          className="flex flex-col py-20 text-white ml-0.5"
         >
           <animated.div style={leftColAnimation}>
-            <form onSubmit={form.onSubmit(() => {})}>
-              <TextInput
+            <form
+             onSubmit={SendEmail}
+            >
+              {/* Use TextField component for each input */}
+              <TextField
                 placeholder="Full Name"
-                mt="md"
                 name="name"
-                {...form.getInputProps("name")}
+                form={form}
+                md="md"
               />
-
-              <TextInput
+              <TextField
                 placeholder="Email Address"
-                mt="md"
                 name="email"
-                {...form.getInputProps("email")}
+                form={form}
+                md="md"
               />
 
               <SimpleGrid cols={{ base: 1, sm: 2 }} mt={`md`}>
-                <TextInput
+                <TextField
                   placeholder="Phone Number"
                   name="phone"
-                  {...form.getInputProps("phone")}
+                  form={form}
                 />
-                <TextInput
-                  placeholder="Subject"
-                  name="subject"
-                  {...form.getInputProps("subject")}
-                />
+                <TextField placeholder="Subject" name="subject" form={form} />
               </SimpleGrid>
 
               <Textarea
-                mt="md"
                 placeholder="Your message"
                 maxRows={10}
                 minRows={5}
                 autosize
                 name="message"
-                {...form.getInputProps("message")}
+                form={form}
+                mt={20}
+                className=""
               />
 
               <Group justify="center">
                 <Btn
                   text="Send Message"
                   style={`bg-[#43366a] rounded-3xl hover:border-2 hover:border-accent hover:border-solid hover:text-white`}
+                  xl="xl"
                 />
               </Group>
+
+              <input type="submit" value="Send" />
+
+              {/* Display the text if the form has been submitted successfully */}
+              {msg === true && (
+                <Text className="text-accent mt-2">
+                  Your message has been sent successfully!
+                </Text>
+              )}
+
+              {msg === 1 && (
+                <Text className="text-accent mt-2">
+                  Invalid form input form.
+                </Text>
+              )}
+
+              {/* Display the text if the form wasnt submitted successfully */}
+              {msg === false && (
+                <Text className="text-accent mt-2">
+                  Oops! Something went wrong. Please try again later.
+                </Text>
+              )}
             </form>
           </animated.div>
         </Grid.Col>
       </Grid>
-    </div>
+    </section>
   );
 }
