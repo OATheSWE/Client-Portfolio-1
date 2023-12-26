@@ -12,6 +12,8 @@ import sea from "./sea.png";
 import Sqlprogram from "./Sqlprogram.png";
 import AboutImg from "./about-img.png"
 import Banner from "./Banner Image.png"
+import powerBi1 from "./powerBi1.png"
+import powerBi2 from "./powerBi2.png"
 
 const ImageCollection = {
   Excel,
@@ -28,6 +30,8 @@ const ImageCollection = {
   Sqlprogram,
   AboutImg,
   Banner,
+  powerBi1,
+  powerBi2,
 };
 
 export { ImageCollection };

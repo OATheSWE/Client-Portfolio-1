@@ -59,11 +59,11 @@ export const projects = [
     },
     {
       id: 7,
-      title: "Project 7",
+      title: "SURVEY BREAKDOWN",
       type: "power bi",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Essex aperiam quae quasi asperiores quis!",
-      image: ImageCollection.PowerBi,
+        "I performed an in-depth analysis on a diverse dataset encompassing roles, salaries, satisfaction, challenges, preferences, and industry insights.",
+      image: ImageCollection.powerBi2,
       githubRepo: "https://github.com/username/repo1",
     },
     {
@@ -71,7 +71,7 @@ export const projects = [
       title: "Project 8",
       type: "power bi",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Essex aperiam quae quasi asperiores quis!",
+        "Developed a dashboard presenting analyzed insights from electric car data, covering battery, efficiency, price, range, and performance.",
       image: ImageCollection.PowerBi,
       githubRepo: "https://github.com/username/repo1",
     },
@@ -90,28 +90,28 @@ export const projects = [
       src: ImageCollection.Sql,
       project: "SQL",
       detail:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni molestiae cupiditate temporibus itaque non ratione.",
+        " Used SQL to Analyzing databases, extracting insights, and manipulating data for meaningful interpretations and decision-making.",
       link: "#",
     },
     {
       src: ImageCollection.R,
       project: "R Programming",
       detail:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni molestiae cupiditate temporibus itaque non ratione.",
+        "I use R programming for statistical analysis, data visualization, machine learning, and efficient data manipulation in my analytical work.",
       link: "#",
     },
     {
       src: ImageCollection.PowerBi,
       project: "Power Bi",
       detail:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni molestiae cupiditate temporibus itaque non ratione.",
+        "Created impactful visualizations, derive insights, and made informed decisions using PowerBI's intuitive tools for data analysis and presentation.",
       link: "#",
     },
     {
       src: ImageCollection.Excel,
       project: "Excel",
       detail:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni molestiae cupiditate temporibus itaque non ratione.",
+        "Utilized Excel for organizing, cleaning, analyzing, visualizing, and presenting data effectively, aiding insightful decision-making processes.",
       link: "#",
     },
   ];

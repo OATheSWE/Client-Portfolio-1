@@ -32,7 +32,7 @@ export default function Services() {
           {servicesData[index].title}
         </Text>
 
-        <Text fz="sm" className="text-center" lineClamp={5}>
+        <Text fz="sm" className="text-center">
           {servicesData[index].text}
         </Text>
       </Card>

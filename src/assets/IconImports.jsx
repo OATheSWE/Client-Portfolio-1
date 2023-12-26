@@ -1,7 +1,8 @@
-import { FaPhone, FaLocationArrow, FaFacebookF, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa6";
+import { FaPhone, FaLocationArrow, FaFacebookF, FaLinkedinIn, FaGithub, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
-import { FaLaptopCode, FaRegChartBar } from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
+import { FaRegChartBar } from "react-icons/fa";
+import { BsClipboard2Data } from "react-icons/bs";
+import { TbTargetArrow } from "react-icons/tb";
 
 
 
@@ -9,14 +10,13 @@ const IconImports = {
     FaPhone,
     IoMdMail,
     FaLocationArrow,
-    FaFacebookF,
+    FaXTwitter,
     FaLinkedinIn,
     FaGithub,
     FaInstagram,
-    FaLaptopCode,
-    MdPhoneIphone,
     FaRegChartBar,
-
+    BsClipboard2Data,
+    TbTargetArrow,
 
 }
 
