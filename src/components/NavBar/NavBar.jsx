@@ -1,5 +1,5 @@
 import React from "react";
-import { Group, Box, Burger, Drawer, ScrollArea } from "@mantine/core";
+import { Group, Box, Burger, Drawer, ScrollArea, Text } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./NavBar.module.css";
@@ -63,7 +63,7 @@ export default function NavBar() {
         className={`flex justify-between items-center bg-secondary md:px-8 text-white font-sans ${classes.header} ${styles.body}`}
       >
         <Group h="100%" className="flex items-center">
-          <MantineLogo size={30} />
+          <Text className="font-extrabold text-[25px] max-[480px]:text-[21px]">Eboeme</Text>
         </Group>
 
         <Group h="100%" gap={0} className="hidden md:flex">

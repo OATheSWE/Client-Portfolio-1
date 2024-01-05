@@ -95,7 +95,7 @@ export default function Header() {
           <animated.div style={leftColAnimation} className={style.floating}>
             <Image
               src={headerContent.img}
-              className={`max-w-[580px] max-[480px]:object-contain w-full h-[500px] object-cover mx-auto`}
+              className={`max-w-[580px] max-sm:object-contain w-full h-[500px] object-cover mx-auto`}
             />
           </animated.div>
         </Grid.Col>

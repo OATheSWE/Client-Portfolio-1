@@ -4,9 +4,5 @@ export const aboutContent = {
   img: ImageCollection.AboutImg,
   role: "Data Analyst",
   text1:
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,quo? Doloremque delectus assumenda odit ipsa iure beatae porro namquisquam cumque vitae dolorem saepe, autem, quo, consequuntur voluptate pariatur laborum?",
-  text2:
-    " Lorem ipsum dolor sit amet consectetur, adipisicing elit.Perspiciatis nulla similique incidunt quibusdam accusantium abore?",
-  text3:
-    "similique incidunt quibusdam accusantium abore?",
+    "I'm Emechebe Chiebonam, a data analyst passionate about unraveling stories within complex datasets. Skilled in gathering, cleaning, and analyzing data, I specialize in providing actionable insights for strategic decision-making. I excel in transforming complex data into compelling narratives, driving impactful business outcomes through effective communication and a commitment to continuous learning.",
 };
