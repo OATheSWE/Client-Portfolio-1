@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const navLinks = [
   { text: "Home", href: "#home" },
   { text: "About", href: "#about" },
