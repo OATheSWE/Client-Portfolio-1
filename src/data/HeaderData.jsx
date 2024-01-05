@@ -13,6 +13,6 @@ export const headerContent = {
 
 export const socials = [
     { icon: <IconImports.FaLinkedinIn className="w-5 h-5" />, link: '#' },
-    { icon: <IconImports.FaGithub className="w-5 h-5" />, link: '#' },
+    { icon: <IconImports.FaGithub className="w-5 h-5" />, link: 'https://github.com/Eboeme' },
     { icon: <IconImports.FaInstagram className="w-5 h-5" />, link: '#' },
 ];
