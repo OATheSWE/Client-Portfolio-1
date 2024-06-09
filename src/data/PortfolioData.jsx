@@ -41,11 +41,11 @@ export const projects = [
     },
     {
       id: 5,
-      title: "Project 5",
+      title: "Sales dashboard",
       type: "excel",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Essex aperiam quae quasi asperiores quis!",
-      image: ImageCollection.Excel,
+        "The dataset includes U.S. sales orders with customer details, product categories, regions, and sales figures, providing insights for sales optimization and profitability enhancement.",
+      image: ImageCollection.,
       githubRepo: "https://github.com/username/repo1",
     },
     {
