@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const navLinks = [
   { text: "Home", href: "#home" },
   { text: "About", href: "#about" },
@@ -177,7 +178,7 @@ export default function NavBar() {
           >
             <Btn
               text="Hire me"
-              style={`bg-white text-black w-[92vw] max-[360px]:w-[88vw] rounded-3xl border-2 hover:border-accent border-solid hover:bg-accent hover:text-white mt-8`}
+              style={`bg-white text-black w-[92vw] max-[360px]:w-[88vw] rounded-3xl border-2 hover:border-accent border-solid hover:bg-accent hover:text-white mt-8 cursor-pointer`}
             />
           </a>
         </ScrollArea>

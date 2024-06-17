@@ -28,7 +28,7 @@ export default function About() {
   });
 
   return (
-    <section id="about" ref={ref} className={`w-full py-10 ${styles.body} bg-secondary`}>
+    <section id="about" ref={ref} className={`w-full py-10 ${styles.body} bg-secondary `}>
       <Heading name={`About`} name2={`Me`} />
       <Grid gutter={90} className={`font-sans mt-12`}>
         <Grid.Col span={{ base: 12, md: 5.3 }}>

@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "@react-spring/web";
 import { styles, headerContent, socials } from "../../data";
 import Btn from "../Button";
-import classes from "./Header.module.css";
+import style from "./Header.module.css";
 import "./Header.scss";
 
 export default function Header() {
@@ -54,7 +54,7 @@ export default function Header() {
               {headerContent.hi}
             </Title>
 
-            <Title className={`font-sans ${classes.title}`} order={1}>
+            <Title className={`font-sans ${style.title}`} order={1}>
               {headerContent.name}
             </Title>
 
@@ -92,7 +92,7 @@ export default function Header() {
           </animated.div>
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <animated.div style={leftColAnimation} className={classes.floating}>
+          <animated.div style={leftColAnimation} className={style.floating}>
             <Image
               src={headerContent.img}
               className={`max-w-[580px] max-sm:object-contain w-full h-[500px] object-cover mx-auto`}

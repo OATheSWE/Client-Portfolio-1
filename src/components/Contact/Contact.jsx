@@ -61,7 +61,7 @@ export default function Contact() {
       return;
     }
 
-    emailjs.sendForm('service_2gtd918', 'template_8idcxr6', formD.current, 'J3mNgEZxGKtD-N8E_', form.values.email)
+    emailjs.sendForm('service_x3g06gg', 'template_z0iyypf', formD.current, 'J3mNgEZxGKtD-N8E_', form.values.email)
     .then((result) => {
         console.log(result.text);
         setMsg(true);
@@ -105,7 +105,7 @@ export default function Contact() {
         </Grid.Col>
         <Grid.Col
           span={{ base: 12, sm: 6.4 }}
-          className="flex flex-col py-20 text-white ml-0.5"
+          className="flex flex-col py-20 text-white ml-0.5 jus"
         >
           <animated.div style={leftColAnimation}>
             <form
