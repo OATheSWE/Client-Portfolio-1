@@ -10,10 +10,20 @@ import pandas from "./pandas.png";
 import Rprogram from "./Rprogram.png";
 import sea from "./sea.png";
 import Sqlprogram from "./Sqlprogram.png";
-import AboutImg from "./about-img.png"
-import Banner from "./Banner Image.png"
-import powerBi1 from "./powerBi1.png"
-import powerBi2 from "./powerBi2.png"
+import AboutImg from "./about-img.png";
+import Banner from "./Banner Image.png";
+import powerBi1 from "./powerBi1.png";
+import powerBi2 from "./powerBi2.png";
+import USsales from "./USsales.png";
+import simple from "./simple.png";
+import Salesdash from "./Salesdash.png";
+import EuropeSales from "./EuropeSales.png";
+import images from "./images.jpeg";
+import evcars from "./evcars.jpg";
+import google from "./google.jpeg";
+import anime from "./anime.png";
+import chocolate from "./chocolate.png"
+import amazon from "./amazon.png"
 
 const ImageCollection = {
   Excel,
@@ -32,6 +42,16 @@ const ImageCollection = {
   Banner,
   powerBi1,
   powerBi2,
+  USsales,
+  simple,
+  Salesdash,
+  EuropeSales,
+  images,
+  evcars,
+  google,
+  anime,
+  chocolate,
+  amazon,
 };
 
 export { ImageCollection };
